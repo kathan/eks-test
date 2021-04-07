@@ -1,0 +1,25 @@
+version: 2.1
+
+orbs:
+  aws-ecr: circleci/aws-ecr@6.15.3
+  aws-ecs: circleci/aws-ecs@2.1.0
+
+workflows:
+  build-and-deploy:
+    jobs:
+      - aws-ecr/build-and-push-image:
+          account-url: AWS_ECR_ACCOUNT_URL
+          create-repo: true
+          region: AWS_REGION
+          repo: "test-node-app"
+          tag: "${CIRCLE_SHA1}"
+      - aws-ecs/deploy-service-update:
+          requires:
+            - aws-ecr/build-and-push-image # only run this job once aws-ecr/build-and-push-image has completed
+          aws-region: AWS_REGION
+          family: "first-run-task-definition"
+          service-name: "test-container-service"
+          cluster-name: "default-cluster"
+          container-image-name-updates: 'container=test-container,tag=${CIRCLE_SHA1}'
+          force-new-deployment: true
+          verify-revision-is-deployed: true
