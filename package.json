@@ -5,10 +5,10 @@
     "author": "Darrel Kathan <darrelkathan@gmail.com>",
     "main": "server.js",
     "scripts": {
-      "start": "node server.js"
+        "start": "node server.js"
     },
     "dependencies": {
-      "express": "4.17.1",
-      "express-fileupload":"1.2.1"
+        "express": "4.17.1",
+        "express-fileupload": "1.2.1"
     }
-  }
+}
