@@ -17,7 +17,7 @@ workflows:
           requires:
             - aws-ecr/build-and-push-image
           aws-region: AWS_REGION
-          family: "first-run-task-definition"
+          family: "languagelab-task-definition"
           service-name: "languagelab-container-service"
           cluster-name: "languagelab-cluster"
           container-image-name-updates: 'container=languagelab-container,tag=${CIRCLE_SHA1}'
