@@ -1,11 +1,11 @@
-const http = require('http');
+"use 'esversion: 6'";
 
-const port = 8081;
+const express = require('express');
+const app = express();
+const PORT = 80;
 
-const server = http.createServer((req, res) => {
-  const ip = res.socket.remoteAddress;
-  const port = res.socket.remotePort;
-  const msg = `Your IP address is ${ip} and your source port is ${port}. Boo2!`;
-  console.log(msg);
-  res.end(msg);
-}).listen(port);
+app.use('/', express.static('static'));
+
+app.listen(PORT, () => {
+  console.log(`Running on ${PORT}`);
+});

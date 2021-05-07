@@ -11,15 +11,15 @@ workflows:
           account-url: AWS_ECR_ACCOUNT_URL
           create-repo: true
           region: AWS_REGION
-          repo: "test-node-app"
+          repo: "languagelab-app"
           tag: "${CIRCLE_SHA1}"
       - aws-ecs/deploy-service-update:
           requires:
-            - aws-ecr/build-and-push-image # only run this job once aws-ecr/build-and-push-image has completed
+            - aws-ecr/build-and-push-image
           aws-region: AWS_REGION
           family: "first-run-task-definition"
-          service-name: "test-container-service"
-          cluster-name: "default-cluster"
-          container-image-name-updates: 'container=test-container,tag=${CIRCLE_SHA1}'
+          service-name: "languagelab-container-service"
+          cluster-name: "languagelab-cluster"
+          container-image-name-updates: 'container=languagelab-container,tag=${CIRCLE_SHA1}'
           force-new-deployment: true
           verify-revision-is-deployed: true

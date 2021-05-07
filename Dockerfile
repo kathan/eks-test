@@ -1,5 +1,5 @@
 # The Docker image we're creating is based on the NodeJS 10 image.
-FROM node:10
+FROM node:14
  
 # Create app directory
 WORKDIR /etc/testapp
@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
  
 # Open port 80
-EXPOSE 8081
+EXPOSE 80
  
 # Run Node.js
 ENTRYPOINT [ "node", "server.js" ]
